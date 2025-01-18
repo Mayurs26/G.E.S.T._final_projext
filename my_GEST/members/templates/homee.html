@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G.E.S.T - Gesture Enabled Smart Technology</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+
+
+/* Ultra-thin modern scrollbar for WebKit browsers */
+body::-webkit-scrollbar {
+    width: 5px; /* Extra thin scrollbar width */
+    height: 5px; /* Thin height for horizontal scrollbars */
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(20, 20, 20, 0.2); /* Soft dark background with transparency */
+    border-radius: 10px;
+    backdrop-filter: blur(4px); /* Light glass blur effect */
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(191, 219, 254, 0.6); /* blue-200 in RGBA with soft transparency */
+    border-radius: 10px;
+    height: 30px; /* Small thumb height for minimal design */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), /* Inner depth */
+                0 0 6px rgba(191, 219, 254, 0.5); /* Subtle outer glow */
+    transition: all 0.3s ease-in-out;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgba(191, 219, 254, 0.8); /* Slightly brighter thumb on hover */
+    box-shadow: 0 0 8px rgba(191, 219, 254, 0.8), 
+                inset 0 0 5px rgba(0, 0, 0, 0.5); /* Stronger depth and glow */
+    transform: scale(1.1); /* Slight enlargement for a modern hover effect */
+}
+
+body::-webkit-scrollbar-thumb:active {
+    background: rgba(191, 219, 254, 1); /* Fully opaque blue when scrolling */
+    box-shadow: 0 0 10px rgba(191, 219, 254, 1);
+}
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0D0E17, #4B5F6F);
+            scroll-behavior: smooth;
+            background-attachment: fixed;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 0.5rem 0;
+        }
+        
+        nav .container {
+            display: flex; /* Makes items align horizontally */
+            justify-content: space-between; /* Separates logo and links */
+            align-items: center; /* Vertically aligns content */
+            padding: 0 1rem;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6; /* Blue color for G.E.S.T. */
+            margin-left: 10rem;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 1.5rem; /* Adds spacing between links */
+        }
+        
+        nav .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover {
+            color: #3b82f6; /* Blue color on hover */
+        }
+        
+
+        footer {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            padding: 1rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            margin-top: 20px;
+
+        }
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 102, 204, 0.3);
+
+        }
+        .feature-card i {
+            animation: pulse 1.5s infinite;
+        }
+        #feature{
+            margin-top: 300px;
+        }
+        #feature h1{
+            padding-top: 50px;
+        }
+        #feature1{
+            margin-top: 200px;
+        }
+        #feature1 h2{
+            padding-top: 60px;
+        }
+        #how-to-use{
+            margin-top: 20px;
+        }
+        #how-to-use h2{
+            padding-top: 15px;
+        }
+        
+        .modal {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hidden {
+            display: none;
+        }
+        footer {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            padding: 1rem;
+            text-align: center;
+            color: #fff;
+        }
+        footer p:hover {
+            opacity: 1;
+        }
+        button:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            padding: 11rem 2rem;
+            transition: transform 0.6s ease;
+        }
+
+        .scroll-section {
+            transition: transform 0.3s ease;
+        }
+
+        .ad-container {
+            background: linear-gradient(135deg, #ff9800, #ffccbc);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            flex-direction: column;
+        }
+
+        footer:hover p {
+            opacity: 1;
+            transition: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav >
+        <div class="container mx-auto px-6 py-3 flex justify-space-between items-center">
+            <span class="logo text-4xl font-bold text-blue-500">G.E.S.T.</span>
+            <div class="flex items-center space-x-6">
+                <a href="#homee" class="text-white hover:text-blue-500" id="feature-link">HOME</a>
+                <a href="#feature" class="text-white hover:text-blue-500">FEATURE</a>
+                <a href="#feature1" class="text-white hover:text-blue-500">HOW TO USE</a>
+                <a href="{% url 'about' %}" class="text-white hover:text-blue-600">ABOUT</a>
+                {% if user.is_authenticated %}
+                <!-- Show username and logout button if the user is authenticated -->
+                <div class="text-white flex items-center space-x-2">
+                    <span class="text-2xl font-bold font-uppercase text-blue-400">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="text-white hover:text-blue-600">LOGOUT</a>
+                </div>
+            {% else %}
+                <!-- Show Sign In button if the user is not authenticated -->
+                <button onclick="showLoginModal()" class="text-white hover:text-blue-600">SIGN IN</button>
+            {% endif %}
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section id="homee" class="hero-section text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-blue-200">GESTURE <span class="text-blue-500">ENABLED </span>SMART <span class="text-blue-500">TECHNOLOGY</span></h1>
+        <p class="text-lg mt-4">Experience <span class="text-blue-200">gesture-based </span>control like <span class="text-blue-200">never before</span></p>
+    </section>
+
+
+    <!-- Main Content -->
+    <main id="feature" class="shadow-md py3 container mx-auto px-7 py-9">
+        <h1 class="title text-4xl text-center mb-12 text-blue-200">
+            GESTURE <span class="text-blue-500">ENABLED</span> SMART <span class="text-blue-500">TECHNOLOGY</span>
+        </h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Features -->
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer" onclick="validateFeature(this, '{% url 'vm' %}')">
+                <i class="bi bi-volume-up text-5xl text-blue-200 mb-4"></i>
+                <h2 class="text-xl font-bold mb-2 text-blue-400">VOLUME CONTROL</h2>
+                <p class="text-white">Control system volume with hand gestures</p>
+            </div>
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer" onclick="validateFeature(this, '{% url 'calculator' %}')">
+                <i class="bi bi-calculator text-5xl text-blue-200 mb-4"></i>
+                <h2 class="text-xl font-bold mb-2 text-blue-400">VIRTUAL CALCULATOR</h2>
+                <p class="text-white">Perform calculations with hand movements</p>
+            </div>
+
+            
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer" onclick="validateFeature(this, '{% url 'virtual_drawing' %}')">
+                <i class="bi bi-brush text-5xl text-blue-200 mb-4"></i>
+                <h2 class="text-xl font-bold mb-2 text-blue-400">VIRTUAL DRAWING</h2>
+                <p class="text-white">Draw with gesture control</p>
+            </div>
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer" onclick="validateFeature(this, '{% url 'sm' %}')">
+                <i class="bi bi-mouse text-5xl text-blue-200 mb-4"></i>
+                <h2 class="text-xl font-bold mb-2 text-blue-400">VIRTUAL MOUSE CONTROL</h2>
+                <p class="text-white">Control cursor with hand movements</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- How to Use Gesture Controls -->
+    <section id="feature1" class="shadow-md py3 container mx-auto px-7 py-9">
+        <h2 class="title text-4xl text-center mb-12 text-blue-200">
+            HOW TO <span class="text-blue-500">USE</span> GESTURE <span class="text-blue-500">CONTROL</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer">
+                <h3 class="text-lg font-bold mb-2 text-blue-200">Volume Adjustments</h3>
+                <p class="text-white">Wave your hand up to increase the volume, or down to decrease it, giving you intuitive control over your music or media playback.</p>
+            </div>
+
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer">
+                <h3 class="text-lg font-bold mb-2 text-blue-200">Virtual Calculator</h3>
+                <p class="text-white">Perform simple or complex calculations by using gestures to input numbers and mathematical symbols, providing an interactive and hands-free experience.</p>
+            </div>
+    
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer">
+                <h3 class="text-lg font-bold mb-2 text-blue-200">Use the Virtual Mouse</h3>
+                <p class="text-white">Point your hand in the direction where you want the cursor to move, allowing precise control without a physical mouse.</p>
+            </div>
+    
+            <div class="feature-card rounded-lg p-6 text-center cursor-pointer">
+                <h3 class="text-lg font-bold mb-2 text-blue-200">Draw with Gestures</h3>
+                <p class="text-white">Create drawings or sketches by waving your hand across the screen, making it easy to express creativity in a digital space.</p>
+            </div>
+        </div>
+    </section>
+    
+
+
+<!-- Sign In Modal -->
+<div id="loginModal" class="modal fixed inset-0 hidden flex items-center justify-center">
+    <div class="bg-gray-700 rounded-lg p-8 max-w-md w-full m-4">
+        <h2 class="text-2xl font-bold mb-4 text-blue-600">Login</h2>
+        {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                    <p class="text-red-600">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form id="loginForm" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-white mb-2">Username</label>
+                <input type="text" name="username" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-white mb-2">Password</label>
+                <input type="password" name="password" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Login</button>
+                <button type="button" onclick="closeLoginModal()" class="text-white hover:text-blue-600">Cancel</button>
+            </div>
+        </form>
+        <p class="mt-4 text-white text-center">
+            Don't have an account? 
+            <a href="#" onclick="showSignUpModal()" class="text-blue-200 hover:text-blue-500">Sign up</a>
+        </p>
+    </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div id="signUpModal" class="modal fixed inset-0 hidden flex items-center justify-center">
+    <div class="bg-gray-700 rounded-lg p-8 max-w-md w-full m-4">
+        <h2 class="text-2xl font-bold mb-4 text-blue-600">Sign Up</h2>
+        <form id="signupForm" method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-white mb-2">Username</label>
+                <input type="text" name="username" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-white mb-2">Email</label>
+                <input type="email" name="email" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-white mb-2">Password</label>
+                <input type="password" name="password" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Sign Up</button>
+                <button type="button" onclick="closeSignUpModal()" class="text-white hover:text-blue-600">Cancel</button>
+            </div>
+        </form>
+        {% comment %} <p class="mt-4 text-gray-700 text-center text-blue-200">
+            Already have an account? 
+            <a href="#" onclick="showLoginModal()" class="text-blue-600 hover:text-blue-700">Log in</a>
+        </p> {% endcomment %}
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-6">
+        <p class="text-gray-400 text-sm">© 2024 G.E.S.T. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+
+        function showSignUpModal() {
+            closeLoginModal();
+            document.getElementById('signUpModal').classList.remove('hidden');
+        }
+
+        function closeSignUpModal() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('signupForm').reset();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('Logged in successfully!');
+            closeLoginModal();
+        }
+
+        function handleSignUp(event) {
+            event.preventDefault();
+            alert('Signed up successfully!');
+            closeSignUpModal();
+        }
+
+        function validateFeature(feature) {
+            const loggedIn = "{{ user.is_authenticated|yesno:'true,false' }}" === "true";
+            if (loggedIn) {
+                alert(`Accessing ${feature}`);
+                // Load feature-specific functionality here
+            } else {
+                showLoginModal();
+            }
+        }
+
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
+        // Example usage with fetch()
+        function submitFormWithFetch() {
+            const csrfToken = getCSRFToken();
+            fetch('/some-url/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ key: 'value' })
+            }).then(response => {
+                // Handle response
+            });
+        }
+
+        document.getElementById('feature-link').addEventListener('click', function() {
+            fetch("{% url 'stop_volume_control' %}", { method: 'GET' })
+                .then(response => {
+                    if (response.ok) {
+                        // Redirect to home or another page after stopping webcam
+                        window.location.href = "{% url 'homee' %}";
+                    }
+                })
+                .catch(error => {
+                    console.error('Error stopping webcam:', error);
+                });
+        });
+        
+
+
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginForm').reset();
+        }
+
+        function validateFeature(feature, redirectUrl = '') {
+            const loggedIn = "{{ user.is_authenticated|yesno:'true,false' }}";
+            if (loggedIn === "true") {
+                if (redirectUrl) window.location.href = redirectUrl;
+                else alert(`Accessing ${feature}`);
+            } else {
+                showLoginModal();
+            }
+        }
+        
+        
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Check if the backend passed the trigger_login flag
+            const triggerLogin = "{{ trigger_login|default:False }}";
+            if (triggerLogin === "True") {
+                showLoginModal();  // Show the login modal automatically
+            }
+        });
+    </script>
+</body>
+</html>

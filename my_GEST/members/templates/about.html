@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About G.E.S.T.</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+
+        /* Ultra-thin modern scrollbar for WebKit browsers */
+        body::-webkit-scrollbar {
+            width: 5px; /* Extra thin scrollbar width */
+            height: 5px; /* Thin height for horizontal scrollbars */
+        }
+
+        body::-webkit-scrollbar-track {
+            background: rgba(20, 20, 20, 0.2); /* Soft dark background with transparency */
+            border-radius: 10px;
+            backdrop-filter: blur(4px); /* Light glass blur effect */
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: rgba(191, 219, 254, 0.6); /* blue-200 in RGBA with soft transparency */
+            border-radius: 10px;
+            height: 30px; /* Small thumb height for minimal design */
+            box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.4), /* Inner depth */
+                        0 0 6px rgba(191, 219, 254, 0.5); /* Subtle outer glow */
+            transition: all 0.3s ease-in-out;
+        }
+
+        body::-webkit-scrollbar-thumb:hover {
+            background: rgba(191, 219, 254, 0.8); /* Slightly brighter thumb on hover */
+            box-shadow: 0 0 8px rgba(191, 219, 254, 0.8), 
+                        inset 0 0 5px rgba(0, 0, 0, 0.5); /* Stronger depth and glow */
+            transform: scale(1.1); /* Slight enlargement for a modern hover effect */
+        }
+
+        body::-webkit-scrollbar-thumb:active {
+            background: rgba(191, 219, 254, 1); /* Fully opaque blue when scrolling */
+            box-shadow: 0 0 10px rgba(191, 219, 254, 1);
+        }
+
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(135deg, #0D0E17, #4B5F6F);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .highlight {
+            color: #2563eb;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            padding: 0.5rem 0;
+        }
+        
+        nav .container {
+            display: flex; /* Makes items align horizontally */
+            justify-content: space-between; /* Separates logo and links */
+            align-items: center; /* Vertically aligns content */
+            padding: 0 1rem;
+        }
+        
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #3b82f6; /* Blue color for G.E.S.T. */
+            margin-left: 10rem;
+        }
+        
+        nav .nav-links {
+            display: flex;
+            gap: 1.5rem; /* Adds spacing between links */
+        }
+        
+        nav .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav .nav-links a:hover {
+            color: #3b82f6; /* Blue color on hover */
+        }
+        
+
+        /* Main content with enough padding to avoid navbar and footer overlap */
+        main {
+            margin-top: 70px; /* Adjusted for navbar height */
+            flex-grow: 1; /* Ensures the main content grows to fill space */
+            padding-bottom: 60px; /* Adds space for the footer */
+            overflow-y: auto;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            padding: 1rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        /* Profile popup styling */
+        .profile-popup {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            background-color: #444;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 200px;
+            display: none;
+            z-index: 1001;
+        }
+
+        .profile-popup button {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .text_body{
+            color : #000;
+
+        }
+
+        .profile-popup button:hover {
+            background-color: #3578e5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav >
+        <div class="container mx-auto px-6 py-3 flex justify-space-between items-center">
+            <span class="logo text-4xl font-bold text-blue-500">G.E.S.T.</span>
+            <div class="flex items-center space-x-6">
+                <a href="{% url 'homee' %}" class="text-white hover:text-blue-600">HOME</a>
+                <a href="{% url 'homee' %}#feature" class="text-white hover:text-blue-500">FEATURE</a>
+                <a href="{% url 'homee' %}#how-to-use" class="text-white hover:text-blue-500">HOW TO USE</a>
+                <a href="{% url 'about' %}" class="text-white hover:text-blue-600">ABOUT</a>
+                {% if user.is_authenticated %}
+                <!-- Show username and logout button if the user is authenticated -->
+                <div class="text-white flex items-center space-x-2">
+                    <span class="text-2xl text-uppercase font-bold text-blue-400">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="text-white hover:text-blue-600">LOGOUT</a>
+                </div>
+            {% else %}
+                <!-- Show Sign In button if the user is not authenticated -->
+                <button onclick="showLoginModal()" class="text-white hover:text-blue-600">SIGN IN</button>
+            {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+        <main class="container mx-auto px-6 py-8">
+            <h1 class="header text-4xl text-center mb-8 uppercase text-blue-200">
+                About <span class="text-blue-500">Gesture <span class="text-blue-200">Enabled </span class="text-blue-500">Smart </span>Technology
+            </h1>
+            
+            <section class="mb-12">
+                <h2 class="text-2xl mb-4">What is G.E.S.T.?</h2>
+                <p class="leading-relaxed text-lg">
+                    <span class="highlight">Gesture Enabled Smart Technology</span> (G.E.S.T.) is a revolutionary system designed to provide seamless, touchless control over digital devices. It employs advanced gesture recognition to enable features like virtual mouse control, drag-and-drop functionality, and more.
+                </p>
+            </section>
+    
+            <section class="mb-12">
+                <h2 class="text-2xl mb-4">Why G.E.S.T.?</h2>
+                <p class="leading-relaxed text-lg">
+                    G.E.S.T. eliminates the need for physical contact, promoting hygiene and enabling accessibility for all. Its intuitive interface allows users to interact naturally with devices using hand movements, offering a futuristic and efficient alternative to traditional controls.
+                </p>
+            </section>
+    
+            <section class="mb-12">
+                <h2 class="text-2xl mb-4">Key Features</h2>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Volume Control: Adjust system volume with simple hand gestures.</li>
+                    <li>Virtual Calculator: Perform calculations using hand movements.</li>
+                    <li>Virtual Mouse Control: Navigate devices without a physical mouse.</li>
+                    <li>Drag and Drop: Move objects on the screen using gestures.</li>
+                </ul>
+            </section>
+    
+            <section class="mb-12">
+                <h2 class="text-2xl mb-4">Applications</h2>
+                <p class="leading-relaxed text-lg">G.E.S.T. finds applications in various fields:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li><span class="highlight">Healthcare</span>: Hands-free operation of medical devices and systems.</li>
+                    <li><span class="highlight">Education</span>: Create interactive and touchless learning experiences.</li>
+                    <li><span class="highlight">Gaming</span>: Immersive, gesture-controlled gaming.</li>
+                    <li><span class="highlight">Assistive Technology</span>: Enable seamless device control for individuals with disabilities.</li>
+                </ul>
+            </section>
+    
+            {% comment %} <section>
+                <h2 class="text-2xl mb-4">Future Scope</h2>
+                <p class="leading-relaxed text-lg">
+                    G.E.S.T. has the potential to integrate with <span class="highlight">AR/VR systems, smart home devices,</span> and IoT, expanding its use cases and shaping the future of touchless technology.
+                </p>
+            </section> {% endcomment %}
+        </main>
+
+
+
+    <div class="text_body">
+    <!-- Sign In Modal -->
+<div id="loginModal" class="modal fixed inset-0 hidden flex items-center justify-center">
+    <div class="bg-gray-700 rounded-lg p-8 max-w-md w-full m-4">
+        <h2 class="text-2xl font-bold mb-4 text-blue-600">Login</h2>
+        {% if messages %}
+            <div class="mb-4">
+                {% for message in messages %}
+                    <p class="text-red-600">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form id="loginForm" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-white mb-2">Username</label>
+                <input type="text" name="username" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-white mb-2">Password</label>
+                <input type="password" name="password" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Login</button>
+                <button type="button" onclick="closeLoginModal()" class="text-blue-200 hover:text-blue-600">Cancel</button>
+            </div>
+        </form>
+        <p class="mt-4 text-white text-center">
+            Don't have an account? 
+            <a href="#" onclick="showSignUpModal()" class="text-blue-200 hover:text-blue-700">Sign up</a>
+        </p>
+    </div>
+</div>
+
+<!-- Sign Up Modal -->
+<div id="signUpModal" class="modal fixed inset-0 hidden flex items-center justify-center">
+    <div class="bg-gray-700 rounded-lg p-8 max-w-md w-full m-4">
+        <h2 class="text-2xl font-bold mb-4 text-blue-600">Sign Up</h2>
+        <form id="signupForm" method="POST" action="{% url 'signup' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="block text-white mb-2">Username</label>
+                <input type="text" name="username" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-white mb-2">Email</label>
+                <input type="email" name="email" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-white mb-2">Password</label>
+                <input type="password" name="password" class="w-full bg-transparent border-b border-blue-500 text-blue-200 focus:outline-none focus:ring-0" required>
+            </div>
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Sign Up</button>
+                <button type="button" onclick="closeSignUpModal()" class="text-blue-200 hover:text-blue-600">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-center py-6">
+        <p class="text-gray-400 text-sm">© 2024 G.E.S.T. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Show profile popup when the username is clicked
+        function showProfilePopup(event) {
+            const popup = document.getElementById('profilePopup');
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+
+            // Prevent click from closing the popup when it's clicked inside the popup itself
+            event.stopPropagation();
+        }
+
+        // Close the profile popup when clicking anywhere else
+        document.addEventListener('click', function(event) {
+            const popup = document.getElementById('profilePopup');
+            const username = document.querySelector('.cursor-pointer');
+            if (!popup.contains(event.target) && event.target !== username) {
+                popup.style.display = 'none';
+            }
+        });
+
+        // Logout functionality
+        function logout() {
+            alert("Logging out...");
+            // Close the profile popup by triggering the click event handler
+            const popup = document.getElementById('profilePopup');
+            popup.style.display = 'none';
+        }
+        
+        function showSignUpModal() {
+            closeLoginModal();
+            document.getElementById('signUpModal').classList.remove('hidden');
+        }
+
+        function closeSignUpModal() {
+            document.getElementById('signUpModal').classList.add('hidden');
+            document.getElementById('signupForm').reset();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            alert('Logged in successfully!');
+            closeLoginModal();
+        }
+
+        function handleSignUp(event) {
+            event.preventDefault();
+            alert('Signed up successfully!');
+            closeSignUpModal();
+        }
+
+        function validateFeature(feature) {
+            const loggedIn = "{{ user.is_authenticated|yesno:'true,false' }}" === "true";
+            if (loggedIn) {
+                alert(`Accessing ${feature}`);
+                // Load feature-specific functionality here
+            } else {
+                showLoginModal();
+            }
+        }
+
+        function getCSRFToken() {
+            return document.querySelector('[name=csrfmiddlewaretoken]').value;
+        }
+        // Example usage with fetch()
+        function submitFormWithFetch() {
+            const csrfToken = getCSRFToken();
+            fetch('/some-url/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ key: 'value' })
+            }).then(response => {
+                // Handle response
+            });
+        }
+
+
+
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginForm').reset();
+        }
+
+        function validateFeature(feature) {
+            if (!{{ user.is_authenticated|yesno:'true,false' }}) {
+                showLoginModal();
+            } else {
+                window.location.href = '/' + feature;
+            }
+        }
+
+    </script>
+</body>
+</html>
